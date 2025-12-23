@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://gh2npn2em8w3"]
+
+[ext_resource type="Texture2D" uid="uid://c4akxg72x3yw6" path="res://assets/animations/cherry.png" id="1_dmcy2"]
+[ext_resource type="Script" uid="uid://b7g5ilygp68l" path="res://scenes/cherry.gd" id="1_e05bo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e05bo"]
+atlas = ExtResource("1_dmcy2")
+region = Rect2(0, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3f1j4"]
+atlas = ExtResource("1_dmcy2")
+region = Rect2(21, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8tha"]
+atlas = ExtResource("1_dmcy2")
+region = Rect2(42, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0uqn"]
+atlas = ExtResource("1_dmcy2")
+region = Rect2(63, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_df8av"]
+atlas = ExtResource("1_dmcy2")
+region = Rect2(84, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2deq"]
+atlas = ExtResource("1_dmcy2")
+region = Rect2(105, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f87m5"]
+atlas = ExtResource("1_dmcy2")
+region = Rect2(126, 0, 21, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x33wp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e05bo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3f1j4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8tha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0uqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_df8av")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e2deq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f87m5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yxhcw"]
+
+[node name="Cherry" type="Area2D" groups=["prizes"]]
+scale = Vector2(3, 3)
+script = ExtResource("1_e05bo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_x33wp")
+autoplay = "default"
+frame_progress = 0.23108728
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["prizes"]]
+scale = Vector2(0.8, 0.8)
+shape = SubResource("CircleShape2D_yxhcw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

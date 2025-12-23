@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwlf2y7yxls61"]
+
+[ext_resource type="Texture2D" uid="uid://cc518fqgrm3xp" path="res://assets/images/backgrounds/forest_of_illusion/back.png" id="1_e7a5w"]
+[ext_resource type="Texture2D" uid="uid://bwv0nxc13fwe2" path="res://assets/images/backgrounds/forest_of_illusion/middle.png" id="2_g46x7"]
+
+[node name="ParallaxBack" type="Node2D"]
+texture_filter = 1
+
+[node name="BackParallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.7, 1)
+repeat_size = Vector2(1600, 0)
+
+[node name="Sprite2D2" type="Sprite2D" parent="BackParallax2D"]
+texture_repeat = 2
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_e7a5w")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 272)
+
+[node name="MidleParallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.8, 1)
+repeat_size = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="MidleParallax2D"]
+texture_filter = 1
+texture_repeat = 2
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_g46x7")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 768, 272)

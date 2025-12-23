@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw5t2nhrhtwnc"]
+
+[ext_resource type="Script" uid="uid://bae3o20sm2n8h" path="res://tiled_ground.gd" id="1_1ja8j"]
+
+[node name="TiledGround" type="Node2D"]
+script = ExtResource("1_1ja8j")

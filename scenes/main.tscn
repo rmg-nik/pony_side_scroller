@@ -1,0 +1,90 @@
+[gd_scene load_steps=15 format=3 uid="uid://c8xm557fkan7t"]
+
+[ext_resource type="Script" uid="uid://day2w21uix2w" path="res://scenes/main.gd" id="1_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://dwlf2y7yxls61" path="res://scenes/back_parallax_2d.tscn" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://hm71plmnrliq" path="res://scenes/pony.tscn" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://cw5t2nhrhtwnc" path="res://scenes/tiled_ground.tscn" id="3_tefeu"]
+[ext_resource type="Texture2D" uid="uid://cvfgtafa1w8nb" path="res://assets/images/backgrounds/forest_of_illusion/tiles.png" id="5_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://c2f2e8xm17fpp" path="res://scenes/hud.tscn" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://ceqa3yhatmmxx" path="res://scenes/rock.tscn" id="7_tipki"]
+[ext_resource type="PackedScene" uid="uid://b2tkjad6ggtog" path="res://scenes/stump.tscn" id="8_85g3d"]
+[ext_resource type="AudioStream" uid="uid://q4xluog2dvv3" path="res://assets/sounds/game_background.ogg" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://gh2npn2em8w3" path="res://scenes/cherry.tscn" id="10_choun"]
+[ext_resource type="AudioStream" uid="uid://bgi7vaa4twdfu" path="res://assets/sounds/prize_pickup.ogg" id="11_ya4ey"]
+[ext_resource type="AudioStream" uid="uid://v1qk44owu88s" path="res://assets/sounds/game_over.ogg" id="12_eb6dy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
+size = Vector2(64, 58.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85g3d"]
+size = Vector2(64, 58.5)
+
+[node name="Main" type="Node" node_paths=PackedStringArray("obstacles_templates")]
+script = ExtResource("1_jyhfs")
+obstacles_templates = [NodePath("Rock"), NodePath("Stump")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="ParallaxBack" parent="." instance=ExtResource("1_sugp2")]
+
+[node name="TiledGround" parent="." node_paths=PackedStringArray("segment_templates", "player") instance=ExtResource("3_tefeu")]
+texture_filter = 1
+segment_templates = [NodePath("../GroundBlock_0"), NodePath("../GroundBlock_1")]
+player = NodePath("../Pony")
+
+[node name="Pony" parent="." instance=ExtResource("3_tbgi4")]
+texture_filter = 1
+position = Vector2(128, 520)
+scale = Vector2(1.5, 1.5)
+
+[node name="GroundBlock_0" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2(0, 616)
+
+[node name="Sprite2D" type="Sprite2D" parent="GroundBlock_0"]
+texture = ExtResource("5_o6xl0")
+region_enabled = true
+region_rect = Rect2(16, 11, 64, 69)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundBlock_0"]
+position = Vector2(0, 5.25)
+shape = SubResource("RectangleShape2D_tipki")
+
+[node name="GroundBlock_1" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2(0, 616)
+
+[node name="Sprite2D" type="Sprite2D" parent="GroundBlock_1"]
+texture = ExtResource("5_o6xl0")
+region_enabled = true
+region_rect = Rect2(96, 11, 64, 69)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundBlock_1"]
+position = Vector2(0, 5.25)
+shape = SubResource("RectangleShape2D_85g3d")
+
+[node name="HUD" parent="." instance=ExtResource("6_tefeu")]
+
+[node name="Rock" parent="." instance=ExtResource("7_tipki")]
+visible = false
+position = Vector2(0, 570)
+scale = Vector2(1.2, 1.2)
+
+[node name="Stump" parent="." instance=ExtResource("8_85g3d")]
+visible = false
+position = Vector2(0, 575)
+scale = Vector2(1.7, 1.7)
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_85g3d")
+
+[node name="Cherry" parent="." instance=ExtResource("10_choun")]
+visible = false
+position = Vector2(0, 400)
+
+[node name="PrizePickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_ya4ey")
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_eb6dy")
